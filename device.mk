@@ -16,8 +16,12 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     otapreopt_script
 
+# Board
+TARGET_BOARD_PLATFORM := taro
+
+# Kernel
+include vendor/qcom/proprietary/kernel-platform/kernel-platform-product.mk
+include vendor/qcom/proprietary/kernel-platform/kernel-platform-board.mk
+
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# Platform
-TARGET_BOARD_PLATFORM := taro
