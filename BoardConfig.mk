@@ -35,6 +35,16 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a75
 
+# Kernel
+BOARD_BOOTCONFIG := \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3
+
+BOARD_KERNEL_CMDLINE := \
+    msm_geni_serial.con_enabled=0 \
+    video=vfb:640x400,bpp=32,memsize=3072000
+
 # Partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := product system system_ext
 BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6438256640
