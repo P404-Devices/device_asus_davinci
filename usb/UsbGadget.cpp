@@ -47,6 +47,8 @@
 #define QDSS_INST_NAME_PROP "vendor.usb.qdss.inst.name"
 #define CONFIG_STRING CONFIG_PATH "strings/0x409/configuration"
 
+#define AURA 1 << 9
+
 namespace android {
 namespace hardware {
 namespace usb {
@@ -241,31 +243,31 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
   V1_0::Status ret = Status::SUCCESS;
   switch (functions) {
     case static_cast<uint64_t>(GadgetFunction::ADB):
-      ret = setVidPid("0x18d1", "0x4ee7");
+      ret = setVidPid("0x0b05", "0x7770");
       break;
     case static_cast<uint64_t>(GadgetFunction::MTP):
-      ret = setVidPid("0x18d1", "0x4ee1");
+      ret = setVidPid("0x0b05", "0x7772");
       break;
     case GadgetFunction::ADB | GadgetFunction::MTP:
-      ret = setVidPid("0x18d1", "0x4ee2");
+      ret = setVidPid("0x0b05", "0x7773");
       break;
     case static_cast<uint64_t>(GadgetFunction::RNDIS):
-      ret = setVidPid("0x18d1", "0x4ee3");
+      ret = setVidPid("0x0b05", "0x7774");
       break;
     case GadgetFunction::ADB | GadgetFunction::RNDIS:
-      ret = setVidPid("0x18d1", "0x4ee4");
+      ret = setVidPid("0x0b05", "0x7775");
       break;
     case static_cast<uint64_t>(GadgetFunction::PTP):
-      ret = setVidPid("0x18d1", "0x4ee5");
+      ret = setVidPid("0x0b05", "0x7776");
       break;
     case GadgetFunction::ADB | GadgetFunction::PTP:
-      ret = setVidPid("0x18d1", "0x4ee6");
+      ret = setVidPid("0x0b05", "0x7777");
       break;
     case static_cast<uint64_t>(GadgetFunction::MIDI):
-      ret = setVidPid("0x18d1", "0x4ee8");
+      ret = setVidPid("0x0b05", "0x7778");
       break;
     case GadgetFunction::ADB | GadgetFunction::MIDI:
-      ret = setVidPid("0x18d1", "0x4ee9");
+      ret = setVidPid("0x0b05", "0x7779");
       break;
     case static_cast<uint64_t>(GadgetFunction::ACCESSORY):
       ret = setVidPid("0x18d1", "0x2d00");
@@ -285,6 +287,12 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
     case GadgetFunction::ADB | GadgetFunction::ACCESSORY |
 	    GadgetFunction::AUDIO_SOURCE:
       ret = setVidPid("0x18d1", "0x2d05");
+      break;
+    case static_cast<uint64_t>(AURA):
+      ret = setVidPid("0x0b05", "0x7791");
+      break;
+    case AURA | GadgetFunction::ADB:
+      ret = setVidPid("0x0b05", "0x7792");
       break;
     default:
       ALOGE("Combination not supported");
@@ -423,6 +431,12 @@ Return<void> UsbGadget::setCurrentUsbFunctions(
 
   if (status != Status::SUCCESS) {
     goto error;
+  }
+
+  if (functions == static_cast<uint64_t>(AURA)) {
+	  functions = static_cast<uint64_t>(GadgetFunction::ACCESSORY);
+  } else if (functions == (AURA | GadgetFunction::ADB)) {
+	  functions = (GadgetFunction::ACCESSORY | GadgetFunction::ADB);
   }
 
   status = setupFunctions(functions, callback, timeout);
