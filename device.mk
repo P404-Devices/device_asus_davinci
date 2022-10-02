@@ -158,7 +158,8 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     FrameworksResTarget_Vendor \
     WifiResTarget_cape \
-    WifiResTarget_spf
+    WifiResTarget_spf \
+    Zenfone9Frameworks
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
