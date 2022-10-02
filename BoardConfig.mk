@@ -132,3 +132,13 @@ TARGET_USERIMAGES_USE_F2FS := true
 SOONG_CONFIG_NAMESPACES += ufsbsg
 SOONG_CONFIG_ufsbsg += ufsframework
 SOONG_CONFIG_ufsbsg_ufsframework := bsg
+
+# WLAN
+BOARD_HAS_QCOM_WLAN := true
+PRODUCT_VENDOR_MOVE_ENABLED := true
+TARGET_WLAN_CHIP := qca6490
+WIFI_DRIVER_BUILT := qca_cld3
+WIFI_DRIVER_DEFAULT := qca_cld3
+WIFI_DRIVER_INSTALL_TO_KERNEL_OUT := true
+
+include device/qcom/wlan/taro/BoardConfigWlan.mk

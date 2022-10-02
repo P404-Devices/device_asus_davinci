@@ -71,6 +71,9 @@ $(RFS_MSM_WPSS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 WIFI_FIRMWARE_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/
 $(WIFI_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "Creating WLAN MDSP OTA firmware symlinks: $@"
+	@mkdir -p $@/wlan/qca_cld/qca6490
+	@rm -rf $@/wlan/qca_cld/qca6490/wlan_mac.bin
+	$(hide) ln -sf /mnt/vendor/persist/wlan_mac.bin $@/wlan/qca_cld/qca6490/wlan_mac.bin
 	$(hide) ln -sf /data/vendor/firmware/wlanmdsp.mbn $@/wlanmdsp.otaupdate
 
 ALL_DEFAULT_INSTALLED_MODULES += \
