@@ -157,8 +157,9 @@ PRODUCT_PACKAGES += \
     WifiResTarget_cape \
     WifiResTarget_spf \
     Zenfone9Frameworks \
-    Zenfone9SettingsProvider \
-    Zenfone9SystemUI
+    Zenfone9SystemUI \
+    Zenfone9Settings \
+    Zenfone9SettingsProvider
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
