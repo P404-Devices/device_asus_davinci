@@ -5,3 +5,6 @@
 
 # Fingerprint
 /dev/goodix_fp    u:object_r:fingerprint_device:s0
+
+# NFC
+/dev/pn553        u:object_r:nfc_device:s0
