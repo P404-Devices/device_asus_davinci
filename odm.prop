@@ -1,0 +1,2 @@
+# USB
+persist.sys.usb.config=none
